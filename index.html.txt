@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ace Hub - Enhanced</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="header">
+            <div class="logo">A</div>
+            <div class="title">Ace Hub</div>
+            <div class="subtitle">Command Center</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="section-title">Applications</div>
+            <div class="app-list">
+                <div class="app-item" onclick="openApp('https://silvervalleyca.infinitecampus.org/campus/silvervalley.jsp', 'Campus')">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234CAF50'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='20' font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E" alt="Campus">
+                    <span class="app-name">Campus</span>
+                </div>
+                <div class="app-item" onclick="openApp('https://clever.com/in/svusd/student/portal', 'Clever')">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%236C5CE7'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='18' font-weight='bold'%3ECL%3C/text%3E%3C/svg%3E" alt="Clever">
+                    <span class="app-name">Clever</span>
+                </div>
+                <div class="app-item" onclick="openApp('https://mail.google.com', 'Gmail')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2048px-Gmail_icon_%282020%29.svg.png" alt="Gmail">
+                    <span class="app-name">Gmail</span>
+                </div>
+                <div class="app-item" onclick="openApp('https://youtube.com', 'YouTube')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2048px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube">
+                    <span class="app-name">YouTube</span>
+                </div>
+                <div class="app-item" onclick="openApp('https://drive.google.com', 'Google Drive')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2048px-Google_Drive_icon_%282020%29.svg.png" alt="Drive">
+                    <span class="app-name">Drive</span>
+                </div>
+                <div class="app-item" onclick="openApp('https://github.com/mmmACEmmm', 'GitHub')">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+                    <span class="app-name">GitHub</span>
+                </div>
+            </div>
+            
+            <div class="section-title">Quick Actions</div>
+            <div class="quick-actions">
+                <div class="action-btn" onclick="toggle('stats')">📊 Stats</div>
+                <div class="action-btn" onclick="toggle('ai')">🤖 AI</div>
+            </div>
+            <div class="quick-actions">
+                <div class="action-btn" onclick="toggle('games')">🎮 Games</div>
+                <div class="action-btn" onclick="toggle('tools')">🔧 Tools</div>
+            </div>
+            
+            <div class="section-title">System</div>
+            <div class="stats-mini">
+                <div class="stat-row">
+                    <span class="stat-label">FPS</span>
+                    <span class="stat-value" id="fps">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Ping</span>
+                    <span class="stat-value" id="ping">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="time">--:--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="breadcrumb">Dashboard / Overview</div>
+            <div class="controls">
+                <div class="control-btn" onclick="toggle('stats')" title="Analytics">📊</div>
+                <div class="control-btn" onclick="toggle('ai')" title="AI Tools">🤖</div>
+                <div class="control-btn" onclick="toggle('games')" title="Games">🎮</div>
+                <div class="control-btn" onclick="close()" title="Close">✕</div>
+            </div>
+        </div>
+        
+        <div class="workspace">
+            <div class="dashboard-card" id="dashboardCard">
+                <div class="dashboard-title">Welcome to Ace Hub</div>
+                <div class="dashboard-subtitle">Your digital command center for productivity</div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="toggle('stats')">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Analytics</div>
+                        <div class="feature-desc">System performance metrics</div>
+                    </div>
+                    <div class="feature-card" onclick="toggle('ai')">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-title">AI Tools</div>
+                        <div class="feature-desc">Access AI assistants</div>
+                    </div>
+                    <div class="feature-card" onclick="window.open('https://github.com/mmmACEmmm', '_blank')">
+                        <div class="feature-icon">💻</div>
+                        <div class="feature-title">Projects</div>
+                        <div class="feature-desc">View your repositories</div>
+                    </div>
+                    <div class="feature-card" onclick="toggle('games')">
+                        <div class="feature-icon">🎮</div>
+                        <div class="feature-title">Games</div>
+                        <div class="feature-desc">Play games and relax</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-indicator" id="launchIndicator">
+            <div class="launch-text" id="launchText">Opening...</div>
+            <div class="launch-subtitle">Launching in new tab</div>
+        </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="panel" id="statsPanel">
+        <div class="panel-header">
+            <div class="panel-title">System Analytics</div>
+            <div class="close-btn" onclick="closePanel('statsPanel')">×</div>
+        </div>
+        <div class="stats-mini">
+            <div class="stat-row">
+                <span class="stat-label">Frame Rate</span>
+                <span class="stat-value" id="fps2">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Network Latency</span>
+                <span class="stat-value" id="ping2">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Viewport</span>
+                <span class="stat-value" id="view">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Browser Engine</span>
+                <span class="stat-value" id="browser">--</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Platform</span>
+                <span class="stat-value" id="platform">--</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Panel -->
+    <div class="panel" id="aiPanel">
+        <div class="panel-header">
+            <div class="panel-title">AI Assistant Hub</div>
+            <div class="close-btn" onclick="closePanel('aiPanel')">×</div>
+        </div>
+        <div class="ai-grid">
+            <!-- Major AI Assistants for Learning -->
+            <a href="https://chat.openai.com/" target="_blank" class="ai-item">
+                <img src="https://cdn.oaistatic.com/assets/apple-touch-icon-mz9nytnj.webp" alt="ChatGPT">
+                <span class="ai-name">ChatGPT</span>
+            </a>
+            <a href="https://claude.ai/" target="_blank" class="ai-item">
+                <img src="https://claude.ai/favicon.ico" alt="Claude">
+                <span class="ai-name">Claude</span>
+            </a>
+            <a href="https://gemini.google.com/app" target="_blank" class="ai-item">
+                <img src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" alt="Gemini">
+                <span class="ai-name">Gemini</span>
+            </a>
+            <a href="https://copilot.microsoft.com/" target="_blank" class="ai-item">
+                <img src="https://www.microsoft.com/favicon.ico" alt="Copilot">
+                <span class="ai-name">Copilot</span>
+            </a>
+            
+            <!-- Math & Science AI -->
+            <a href="https://www.photomath.com/" target="_blank" class="ai-item">
+                <img src="https://www.photomath.com/favicon.ico" alt="Photomath">
+                <span class="ai-name">Photomath</span>
+            </a>
+            <a href="https://www.symbolab.com/" target="_blank" class="ai-item">
+                <img src="https://www.symbolab.com/favicon.ico" alt="Symbolab">
+                <span class="ai-name">Symbolab</span>
+            </a>
+            <a href="https://www.mathway.com/" target="_blank" class="ai-item">
+                <img src="https://www.mathway.com/favicon.ico" alt="Mathway">
+                <span class="ai-name">Mathway</span>
+            </a>
+            <a href="https://calculator.net/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3ECALC%3C/text%3E%3C/svg%3E" alt="Calculator">
+                <span class="ai-name">Calculator</span>
+            </a>
+            
+            <!-- Coding & Programming AI -->
+            <a href="https://github.com/features/copilot" target="_blank" class="ai-item">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Copilot">
+                <span class="ai-name">GH Copilot</span>
+            </a>
+            <a href="https://codeium.com/" target="_blank" class="ai-item">
+                <img src="https://codeium.com/favicon.ico" alt="Codeium">
+                <span class="ai-name">Codeium</span>
+            </a>
+            <a href="https://www.cursor.so/" target="_blank" class="ai-item">
+                <img src="https://www.cursor.so/favicon.ico" alt="Cursor">
+                <span class="ai-name">Cursor</span>
+            </a>
+            <a href="https://www.codecademy.com/" target="_blank" class="ai-item">
+                <img src="https://www.codecademy.com/favicon.ico" alt="Codecademy">
+                <span class="ai-name">Codecademy</span>
+            </a>
+            
+            <!-- Writing & English AI -->
+            <a href="https://quillbot.com/" target="_blank" class="ai-item">
+                <img src="https://quillbot.com/favicon.ico" alt="QuillBot">
+                <span class="ai-name">QuillBot</span>
+            </a>
+            <a href="https://www.hemingwayapp.com/" target="_blank" class="ai-item">
+                <img src="https://www.hemingwayapp.com/favicon.ico" alt="Hemingway">
+                <span class="ai-name">Hemingway</span>
+            </a>
+            <a href="https://docs.google.com/" target="_blank" class="ai-item">
+                <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs">
+                <span class="ai-name">Google Docs</span>
+            </a>
+            <a href="https://www.wordtune.com/" target="_blank" class="ai-item">
+                <img src="https://www.wordtune.com/favicon.ico" alt="Wordtune">
+                <span class="ai-name">Wordtune</span>
+            </a>
+            
+            <!-- Research & Study AI -->
+            <a href="https://www.perplexity.ai/" target="_blank" class="ai-item">
+                <img src="https://www.perplexity.ai/favicon.svg" alt="Perplexity">
+                <span class="ai-name">Perplexity</span>
+            </a>
+            <a href="https://www.phind.com/" target="_blank" class="ai-item">
+                <img src="https://www.phind.com/favicon.ico" alt="Phind">
+                <span class="ai-name">Phind</span>
+            </a>
+            <a href="https://scholar.google.com/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234285F4'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='12' font-weight='bold'%3ESCH%3C/text%3E%3C/svg%3E" alt="Google Scholar">
+                <span class="ai-name">Scholar</span>
+            </a>
+            <a href="https://www.semantic-scholar.org/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234A90E2'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3ESS%3C/text%3E%3C/svg%3E" alt="Semantic Scholar">
+                <span class="ai-name">Semantic Scholar</span>
+            </a>
+            
+            <!-- Study Tools AI -->
+            <a href="https://quizlet.com/" target="_blank" class="ai-item">
+                <img src="https://quizlet.com/favicon.ico" alt="Quizlet">
+                <span class="ai-name">Quizlet</span>
+            </a>
+            <a href="https://www.khanacademy.org/" target="_blank" class="ai-item">
+                <img src="https://www.khanacademy.org/favicon.ico" alt="Khan Academy">
+                <span class="ai-name">Khan Academy</span>
+            </a>
+            <a href="https://socratic.google.com/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234285F4'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3ESO%3C/text%3E%3C/svg%3E" alt="Socratic">
+                <span class="ai-name">Socratic</span>
+            </a>
+            <a href="https://www.coursera.org/" target="_blank" class="ai-item">
+                <img src="https://www.coursera.org/favicon.ico" alt="Coursera">
+                <span class="ai-name">Coursera</span>
+            </a>
+            
+            <!-- Language Learning AI -->
+            <a href="https://www.babbel.com/" target="_blank" class="ai-item">
+                <img src="https://www.babbel.com/favicon.ico" alt="Babbel">
+                <span class="ai-name">Babbel</span>
+            </a>
+            <a href="https://translate.google.com/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234285F4'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3EGT%3C/text%3E%3C/svg%3E" alt="Google Translate">
+                <span class="ai-name">Translate</span>
+            </a>
+            <a href="https://www.deepl.com/translator" target="_blank" class="ai-item">
+                <img src="https://www.deepl.com/favicon.ico" alt="DeepL">
+                <span class="ai-name">DeepL</span>
+            </a>
+            <a href="https://www.memrise.com/" target="_blank" class="ai-item">
+                <img src="https://www.memrise.com/favicon.ico" alt="Memrise">
+                <span class="ai-name">Memrise</span>
+            </a>
+            
+            <!-- Science & Physics AI -->
+            <a href="https://phet.colorado.edu/" target="_blank" class="ai-item">
+                <img src="https://phet.colorado.edu/favicon.ico" alt="PhET">
+                <span class="ai-name">PhET</span>
+            </a>
+            <a href="https://www.desmos.com/calculator" target="_blank" class="ai-item">
+                <img src="https://www.desmos.com/favicon.ico" alt="Desmos">
+                <span class="ai-name">Desmos</span>
+            </a>
+            <a href="https://www.geogebra.org/" target="_blank" class="ai-item">
+                <img src="https://www.geogebra.org/favicon.ico" alt="GeoGebra">
+                <span class="ai-name">GeoGebra</span>
+            </a>
+            <a href="https://www.wikipedia.org/" target="_blank" class="ai-item">
+                <img src="https://www.wikipedia.org/favicon.ico" alt="Wikipedia">
+                <span class="ai-name">Wikipedia</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Games Panel -->
+    <div class="panel" id="gamesPanel">
+        <div class="panel-header">
+            <div class="panel-title">Games Hub</div>
+            <div class="close-btn" onclick="closePanel('gamesPanel')">×</div>
+        </div>
+        <div class="ai-grid">
+            <!-- Chess Games -->
+            <a href="https://www.chesskid.com/play/computer" target="_blank" class="ai-item">
+                <img src="https://www.chesskid.com/favicon.ico" alt="ChessKid">
+                <span class="ai-name">ChessKid</span>
+            </a>
+            <a href="https://www.chess.com/" target="_blank" class="ai-item">
+                <img src="https://www.chess.com/favicon.ico" alt="Chess.com">
+                <span class="ai-name">Chess.com</span>
+            </a>
+            <a href="https://lichess.org/" target="_blank" class="ai-item">
+                <img src="https://lichess.org/favicon.ico" alt="Lichess">
+                <span class="ai-name">Lichess</span>
+            </a>
+            
+            <!-- Word Games -->
+            <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23538D4E'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3EWORDLE%3C/text%3E%3C/svg%3E" alt="Wordle">
+                <span class="ai-name">Wordle</span>
+            </a>
+            <a href="https://wordleunlimited.org/" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%236AAA64'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='12' font-weight='bold'%3EW∞%3C/text%3E%3C/svg%3E" alt="Wordle Unlimited">
+                <span class="ai-name">Wordle ∞</span>
+            </a>
+            <a href="https://www.spellchecker.net/scrambled-words" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%237C3AED'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3EABC%3C/text%3E%3C/svg%3E" alt="Word Scramble">
+                <span class="ai-name">Word Scramble</span>
+            </a>
+            
+            <!-- Puzzle Games -->
+            <a href="https://www.nytimes.com/puzzles/sudoku/easy" target="_blank" class="ai-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='12' font-weight='bold'%3ESUDOKU%3C/text%3E%3C/svg%3E" alt="Sudoku">
+                <span class="ai-name">Sudoku</span>
+            </a>
+            <a href="https://sudoku.com/" target="_blank" class="ai-item">
+                <img src="https://sudoku.com/favicon.ico" alt="Sudoku.com">
+                <span class="ai-name">Sudoku.com</span>
+            </a>
+            <a href="https://www.jigidi.com/" target="_blank" class="ai-item">
+                <img src="https://www.jigidi.com/favicon.ico" alt="Jigsaw Puzzles">
+                <span class="ai-name">Jigsaw</span>
+            </a>
+            
+            <!-- Classic Games -->
+            <a href="https://minesweeper.online/" target="_blank" class="ai-item">
+                <img src="https://minesweeper.online/favicon.ico" alt="Minesweeper">
+                <span class="ai-name">Minesweeper</span>
+            </a>
+            <a href="https://tetris.com/play-tetris" target="_blank" class="ai-item">
+                <img src="https://tetris.com/favicon.ico" alt="Tetris">
+                <span class="ai-name">Tetris</span>
+            </a>
+            <a href="https://solitaire.org/" target="_blank" class="ai-item">
+                <img src="https://solitaire.org/favicon.ico" alt="Solitaire">
+                <span class="ai-name">Solitaire</span>
+            </a>
+            
+            <!-- Brain Games -->
+            <a href="https://www.lumosity.com/" target="_blank" class="ai-item">
+                <img src="https://www.lumosity.com/favicon.ico" alt="Lumosity">
+                <span class="ai-name">Lumosity</span>
+            </a>
+            <a href="https://www.elevateapp.com/" target="_blank" class="ai-item">
+                <img src="https://www.elevateapp.com/favicon.ico" alt="Elevate">
+                <span class="ai-name">Elevate</span>
+            </a>
+            <a href="https://www.peakbrain.com/" target="_blank" class="ai-item">
+                <img src="https://www.peakbrain.com/favicon.ico" alt="Peak">
+                <span class="ai-name">Peak</span>
+            </a>
+            
+            <!-- Casual Games -->
+            <a href="https://2048game.com/" target="_blank" class="ai-item">
+                <img src="https://2048game.com/favicon.ico" alt="2048">
+                <span class="ai-name">2048</span>
+            </a>
+            <a href="https://www.coolmathgames.com/" target="_blank" class="ai-item">
+                <img src="https://www.coolmathgames.com/favicon.ico" alt="Cool Math Games">
+                <span class="ai-name">Cool Math</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tools Panel -->
+    <div class="panel" id="toolsPanel">
+        <div class="panel-header">
+            <div class="panel-title">Tools Hub</div>
+            <div class="close-btn" onclick="closePanel('toolsPanel')">×</div>
+        </div>
+        <div class="ai-grid">
+            <!-- Tools will be added here -->
+            <div class="ai-item" style="opacity: 0.5; cursor: default;">
+                <div style="font-size: 32px; margin-bottom: 12px;">🔧</div>
+                <span class="ai-name">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

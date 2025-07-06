@@ -1,0 +1,124 @@
+// Open app function
+function openApp(url, appName) {
+    showLaunchIndicator(appName);
+    window.open(url, '_blank');
+}
+
+// Show launch indicator when opening apps
+function showLaunchIndicator(appName) {
+    const indicator = document.getElementById('launchIndicator');
+    const text = document.getElementById('launchText');
+    text.textContent = `Opening ${appName}...`;
+    indicator.classList.add('show');
+    
+    setTimeout(() => {
+        indicator.classList.remove('show');
+    }, 1500);
+}
+
+// Panel controls
+function toggle(panel) {
+    const p = document.getElementById(panel + 'Panel');
+    document.querySelectorAll('.panel').forEach(el => el.classList.remove('show'));
+    p.classList.toggle('show');
+}
+
+function closePanel(id) {
+    document.getElementById(id).classList.remove('show');
+}
+
+function close() {
+    document.body.style.opacity = '0';
+    setTimeout(() => document.body.style.display = 'none', 300);
+}
+
+// Real-time stats
+let fps = 0, frames = 0, lastTime = performance.now();
+
+function updateFPS() {
+    frames++;
+    const now = performance.now();
+    if (now - lastTime >= 1000) {
+        fps = Math.round(frames / ((now - lastTime) / 1000));
+        document.getElementById('fps').textContent = fps + ' fps';
+        document.getElementById('fps2').textContent = fps + ' fps';
+        frames = 0;
+        lastTime = now;
+    }
+    requestAnimationFrame(updateFPS);
+}
+updateFPS();
+
+function updatePing() {
+    const start = Date.now();
+    const img = new Image();
+    img.onload = img.onerror = () => {
+        const ping = Date.now() - start;
+        document.getElementById('ping').textContent = ping + 'ms';
+        document.getElementById('ping2').textContent = ping + 'ms';
+    };
+    img.src = location.origin + '/favicon.ico?' + Date.now();
+    setTimeout(updatePing, 3000);
+}
+updatePing();
+
+function updateTime() {
+    const now = new Date();
+    const time = now.getHours().toString().padStart(2, '0') + ':' + 
+                now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('time').textContent = time;
+    
+    document.getElementById('view').textContent = window.innerWidth + '×' + window.innerHeight;
+    
+    const ua = navigator.userAgent;
+    let browser = 'Safari';
+    if (ua.includes('Chrome')) browser = 'Chrome';
+    else if (ua.includes('Firefox')) browser = 'Firefox';
+    else if (ua.includes('Edge')) browser = 'Edge';
+    document.getElementById('browser').textContent = browser;
+    
+    document.getElementById('platform').textContent = navigator.platform;
+}
+
+updateTime();
+setInterval(updateTime, 1000);
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.panel.show').forEach(p => p.classList.remove('show'));
+    }
+});
+
+// Add subtle mouse tracking for enhanced interactivity
+document.addEventListener('mousemove', (e) => {
+    const cards = document.querySelectorAll('.dashboard-card, .feature-card');
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        } else {
+            card.style.transform = '';
+        }
+    });
+});
+
+// Enhanced loading animation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+        document.body.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        document.body.style.opacity = '1';
+        document.body.style.transform = 'scale(1)';
+    }, 100);
+});
